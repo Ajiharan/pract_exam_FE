@@ -1,0 +1,9 @@
+<app-custom-table
+  [tableTitle]="'Products'"
+  [headers]="getPurchaseTableHeader()"
+  [data]="getPurchaseTableData()"
+  [isShow]="true"
+  [paginationData]="{limit,offset,count}"
+  (paginationFunc)="paginationFunc($event)"
+  (onNameChangeFunc)="onNameChangeFunc($event)"
+></app-custom-table>

@@ -1,0 +1,42 @@
+<div class="custom-table-container">
+  <h5>{{ tableTitle }}</h5>
+  <div *ngIf="isShow">
+    <app-search (onChangeFunc)="onNameChange($event)"></app-search>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th *ngFor="let header of headers">{{ header }}</th>
+        <th *ngIf="isShow">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of data">
+        <td *ngFor="let entry of getTableBodyRows(item)">
+          {{ entry }}
+        </td>
+        <td *ngIf="isShow">
+          <button
+            class="btn btn-warning custom-table-container-edit-button"
+            (click)="editItem(item)"
+          >
+            edit
+          </button>
+          <button class="btn btn-danger" (click)="deleteItem(item?._id)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div *ngIf="isShow" class="custom-table-paginator">
+    <mat-paginator
+      [length]="paginationData.count"
+      [pageSize]="paginationData.limit"
+      [pageSizeOptions]="[5, 10, 25, 100]"
+      (page)="getPaginatorData($event)"
+      aria-label="Select page"
+    >
+    </mat-paginator>
+  </div>
+</div>

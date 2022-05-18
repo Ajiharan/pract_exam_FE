@@ -1,0 +1,18 @@
+<app-custom-table
+  [tableTitle]="'Products'"
+  [headers]="getProductTableHeader()"
+  [data]="getProductTableData()"
+  [isShow]="false"
+></app-custom-table>
+<app-custom-table
+  [tableTitle]="'Incoming Purchases'"
+  [headers]="getPurchaseTableHeader()"
+  [data]="getPurchaseTableData()"
+  [isShow]="false"
+></app-custom-table>
+<app-custom-table
+  [tableTitle]="'Orders'"
+  [headers]="getOrderTableHeader()"
+  [data]="getOrderTableData()"
+  [isShow]="false"
+></app-custom-table>

@@ -1,0 +1,16 @@
+.product-page-container {
+  padding: 1rem 2rem;
+  h4 {
+    margin: 1rem 0;
+  }
+  &-errorMsg {
+    color: red;
+  }
+  &-action-button {
+    display: flex;
+    justify-content: flex-end;
+    .btn {
+      width: 25%;
+    }
+  }
+}
