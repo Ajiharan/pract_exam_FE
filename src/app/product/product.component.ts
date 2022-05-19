@@ -20,6 +20,7 @@ export class ProductComponent implements OnInit {
   public isEdit: boolean = false;
   public isLoading: boolean = false;
   public isFormLoading: boolean = false;
+  public isSearch: boolean = false;
 
   private productName: string = '';
   private productId: string = '';
@@ -72,7 +73,10 @@ export class ProductComponent implements OnInit {
     return null;
   }
   private getProductData(): void {
-    this.isLoading = true;
+    if (!this.isSearch) {
+      this.isLoading = true;
+    }
+
     this.resetFom();
     this.inventoryService
       .getProducts({ limit: this.limit, offset: this.offset }, this.productName)
@@ -122,10 +126,12 @@ export class ProductComponent implements OnInit {
   public paginationFunc(event: any): void {
     this.limit = event.pageSize;
     this.offset = event.pageIndex * event.pageSize;
+    this.isSearch = false;
     this.getProductData();
   }
   public onNameChangeFunc(name: string): void {
     this.productName = name;
+    this.isSearch = true;
     this.getProductData();
   }
   public onEditFormFunc(product: any): void {
@@ -147,6 +153,7 @@ export class ProductComponent implements OnInit {
 
   onDeleteFormFunc(id: string): void {
     this.inventoryService.deleteProduct(id).subscribe(() => {
+      this.isSearch = false;
       this.getProductData();
     });
   }
@@ -157,12 +164,14 @@ export class ProductComponent implements OnInit {
       this.inventoryService
         .updateProduct(this.productId, this.productFormGroup.value)
         .subscribe(() => {
+          this.isSearch = false;
           this.getProductData();
         });
     } else {
       this.inventoryService
         .addProduct(this.productFormGroup.value)
         .subscribe(() => {
+          this.isSearch = false;
           this.getProductData();
         });
     }
