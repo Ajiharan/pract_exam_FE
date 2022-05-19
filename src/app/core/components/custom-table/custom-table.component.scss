@@ -1,4 +1,6 @@
 .custom-table-container {
+  max-height: 20rem;
+  min-height: 15rem;
   padding: 2rem 5rem;
   &-edit-button {
     margin-right: 0.3rem;

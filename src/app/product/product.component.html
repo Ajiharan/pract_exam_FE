@@ -1,130 +1,135 @@
 <div class="product-page-container">
-  <form [formGroup]="productFormGroup" (ngSubmit)="onSubmit()">
-    <div class="container">
-      <h4>Add Product</h4>
-      <div class="row">
-        <div class="col col-md-4">
-          <div class="form-group">
-            <label>Product Name</label>
+  <div>
+    <app-loading *ngIf="isFormLoading; else formContainer"></app-loading>
+    <ng-template #formContainer>
+      <form [formGroup]="productFormGroup" (ngSubmit)="onSubmit()">
+        <div class="container">
+          <h4>Add Product</h4>
+          <div class="row">
+            <div class="col col-md-4">
+              <div class="form-group">
+                <label>Product Name</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  formControlName="name"
+                  placeholder="eg:DEll HOD...."
+                />
+                <p class="product-page-container-errorMsg">
+                  {{ validInput(productFormGroup.get("name")) }}
+                </p>
+              </div>
+            </div>
+            <div class="col col-md-4">
+              <div class="form-group">
+                <label>Part Number</label>
+                <input
+                  class="form-control"
+                  type="number"
+                  formControlName="part"
+                  placeholder="eg:255...."
+                />
+                <p class="product-page-container-errorMsg">
+                  {{ validInput(productFormGroup.get("part")) }}
+                </p>
+              </div>
+            </div>
+            <div class="col col-md-4">
+              <div class="form-group">
+                <label>Label</label>
+                <input
+                  class="form-control"
+                  type="text"
+                  formControlName="label"
+                  placeholder="eg:Dell...."
+                />
+                <p class="product-page-container-errorMsg">
+                  {{ validInput(productFormGroup.get("label")) }}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>start</label>
+                <input
+                  class="form-control"
+                  type="number"
+                  formControlName="start"
+                  placeholder="eg:500..."
+                />
+                <p class="product-page-container-errorMsg">
+                  {{ validInput(productFormGroup.get("start")) }}
+                </p>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label>Inventory received</label>
+                <input
+                  class="form-control"
+                  type="number"
+                  formControlName="received"
+                  placeholder="eg:200...."
+                />
+                <p class="product-page-container-errorMsg">
+                  {{ validInput(productFormGroup.get("received")) }}
+                </p>
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label>Inventory onHand</label>
+                <input
+                  class="form-control"
+                  type="number"
+                  formControlName="onHand"
+                  placeholder="eg:50...."
+                />
+                <p class="product-page-container-errorMsg">
+                  {{ validInput(productFormGroup.get("onHand")) }}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label>Minimum</label>
+                <input
+                  class="form-control"
+                  type="number"
+                  formControlName="minimum"
+                  placeholder="eg:44...."
+                />
+                <p class="product-page-container-errorMsg">
+                  {{ validInput(productFormGroup.get("minimum")) }}
+                </p>
+              </div>
+            </div>
+            <div class="col"></div>
+            <div class="col"></div>
+          </div>
+          <div class="row product-page-container-action-button">
             <input
-              class="form-control"
-              type="text"
-              formControlName="name"
-              placeholder="DEll HOD...."
+              *ngIf="isEdit"
+              type="button"
+              value="Cancel"
+              class="btn btn-danger product-page-container-action-button-cancel"
+              (click)="resetFom()"
             />
-            <p class="product-page-container-errorMsg">
-              {{ validInput(productFormGroup.get("name")) }}
-            </p>
+            <input
+              type="submit"
+              [value]="isEdit ? 'Update' : 'Add Product'"
+              class="btn btn-primary"
+              [disabled]="!productFormGroup.valid"
+            />
           </div>
         </div>
-        <div class="col col-md-4">
-          <div class="form-group">
-            <label>Part Number</label>
-            <input
-              class="form-control"
-              type="text"
-              formControlName="part"
-              placeholder="part...."
-            />
-            <p class="product-page-container-errorMsg">
-              {{ validInput(productFormGroup.get("part")) }}
-            </p>
-          </div>
-        </div>
-        <div class="col col-md-4">
-          <div class="form-group">
-            <label>Label</label>
-            <input
-              class="form-control"
-              type="text"
-              formControlName="label"
-              placeholder="label...."
-            />
-            <p class="product-page-container-errorMsg">
-              {{ validInput(productFormGroup.get("label")) }}
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="form-group">
-            <label>start</label>
-            <input
-              class="form-control"
-              type="number"
-              formControlName="start"
-              placeholder="start..."
-            />
-            <p class="product-page-container-errorMsg">
-              {{ validInput(productFormGroup.get("start")) }}
-            </p>
-          </div>
-        </div>
-        <div class="col">
-          <div class="form-group">
-            <label>Inventory received</label>
-            <input
-              class="form-control"
-              type="number"
-              formControlName="received"
-              placeholder="John wick...."
-            />
-            <p class="product-page-container-errorMsg">
-              {{ validInput(productFormGroup.get("received")) }}
-            </p>
-          </div>
-        </div>
-        <div class="col">
-          <div class="form-group">
-            <label>Inventory onHand</label>
-            <input
-              class="form-control"
-              type="number"
-              formControlName="onHand"
-              placeholder="onHand...."
-            />
-            <p class="product-page-container-errorMsg">
-              {{ validInput(productFormGroup.get("onHand")) }}
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <div class="form-group">
-            <label>Minimum</label>
-            <input
-              class="form-control"
-              type="number"
-              formControlName="minimum"
-              placeholder="minimum...."
-            />
-            <p class="product-page-container-errorMsg">
-              {{ validInput(productFormGroup.get("minimum")) }}
-            </p>
-          </div>
-        </div>
-        <div class="col"></div>
-        <div class="col"></div>
-      </div>
-      <div class="row product-page-container-action-button">
-        <input
-          *ngIf="isEdit"
-          type="button"
-          value="Cancel"
-          class="btn btn-danger product-page-container-action-button-cancel"
-          (click)="resetFom()"
-        />
-        <input
-          type="submit"
-          [value]="isEdit ? 'Update' : 'Add Product'"
-          class="btn btn-primary"
-          [disabled]="!productFormGroup.valid"
-        />
-      </div>
-    </div>
-  </form>
+      </form>
+    </ng-template>
+  </div>
   <div class="product-page-container-table">
     <app-custom-table
       [tableTitle]="'Products'"

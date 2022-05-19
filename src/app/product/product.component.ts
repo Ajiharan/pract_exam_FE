@@ -19,6 +19,7 @@ export class ProductComponent implements OnInit {
 
   public isEdit: boolean = false;
   public isLoading: boolean = false;
+  public isFormLoading: boolean = false;
 
   private productName: string = '';
   private productId: string = '';
@@ -72,11 +73,13 @@ export class ProductComponent implements OnInit {
   }
   private getProductData(): void {
     this.isLoading = true;
+    this.resetFom();
     this.inventoryService
       .getProducts({ limit: this.limit, offset: this.offset }, this.productName)
       .subscribe((res: any[]) => {
         setTimeout(() => {
           this.isLoading = false;
+          this.isFormLoading = false;
         }, 2000);
 
         if (res.length > 0) {
@@ -149,18 +152,17 @@ export class ProductComponent implements OnInit {
   }
 
   onSubmit() {
+    this.isFormLoading = true;
     if (this.isEdit) {
       this.inventoryService
         .updateProduct(this.productId, this.productFormGroup.value)
-        .subscribe((res) => {
-          console.log(res);
+        .subscribe(() => {
           this.getProductData();
         });
     } else {
       this.inventoryService
         .addProduct(this.productFormGroup.value)
-        .subscribe((res) => {
-          console.log(res);
+        .subscribe(() => {
           this.getProductData();
         });
     }
