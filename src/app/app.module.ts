@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PurchaseComponent } from './purchase/purchase.component';
@@ -16,6 +16,7 @@ import { CommonModule } from '@angular/common';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductComponent } from './product/product.component';
+import { LoadingComponent } from './core/components/loading/loading.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,8 @@ import { ProductComponent } from './product/product.component';
     HeaderComponent,
     CustomTableComponent,
     SearchComponent,
-    ProductComponent
+    ProductComponent,
+    LoadingComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,8 +39,9 @@ import { ProductComponent } from './product/product.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MatPaginatorModule,
+    MatProgressSpinnerModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

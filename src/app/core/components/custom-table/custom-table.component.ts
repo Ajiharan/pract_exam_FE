@@ -11,6 +11,7 @@ export class CustomTableComponent implements OnInit {
   @Input() data: any[] = [];
   @Input() paginationData: any = null;
   @Input() isShow = false;
+  @Input() isLoading = false;
   @Output() paginationFunc = new EventEmitter();
   @Output() onNameChangeFunc = new EventEmitter();
   @Output() onEditFormFunc = new EventEmitter();

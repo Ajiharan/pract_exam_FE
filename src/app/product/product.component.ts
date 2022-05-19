@@ -18,6 +18,7 @@ export class ProductComponent implements OnInit {
   public count: number = 10;
 
   public isEdit: boolean = false;
+  public isLoading: boolean = false;
 
   private productName: string = '';
   private productId: string = '';
@@ -70,9 +71,14 @@ export class ProductComponent implements OnInit {
     return null;
   }
   private getProductData(): void {
+    this.isLoading = true;
     this.inventoryService
       .getProducts({ limit: this.limit, offset: this.offset }, this.productName)
       .subscribe((res: any[]) => {
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 2000);
+
         if (res.length > 0) {
           this.count = res[0];
           this.productTableData = res[1].map(
@@ -155,6 +161,7 @@ export class ProductComponent implements OnInit {
         .addProduct(this.productFormGroup.value)
         .subscribe((res) => {
           console.log(res);
+          this.getProductData();
         });
     }
   }

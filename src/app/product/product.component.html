@@ -131,6 +131,7 @@
       [headers]="getPurchaseTableHeader()"
       [data]="getPurchaseTableData()"
       [isShow]="true"
+      [isLoading]="isLoading"
       [paginationData]="{limit,offset,count}"
       (paginationFunc)="paginationFunc($event)"
       (onNameChangeFunc)="onNameChangeFunc($event)"
