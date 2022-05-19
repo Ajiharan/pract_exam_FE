@@ -20,6 +20,7 @@ export class ProductComponent implements OnInit {
   public isEdit: boolean = false;
 
   private productName: string = '';
+  private productId: string = '';
 
   private ProductTableHeader: string[] = [
     'Name',
@@ -121,17 +122,40 @@ export class ProductComponent implements OnInit {
   public onEditFormFunc(product: any): void {
     this.isEdit = true;
     const { _id, ...formData } = product;
+    this.productId = _id;
     this.productFormGroup.patchValue(formData);
   }
+
+  public resetFom(): void {
+    this.productFormGroup.reset();
+    this.isEdit = false;
+    this.productId = '';
+  }
+
   ngOnInit(): void {
     this.getProductData();
   }
 
+  onDeleteFormFunc(id: string): void {
+    this.inventoryService.deleteProduct(id).subscribe(() => {
+      this.getProductData();
+    });
+  }
+
   onSubmit() {
-    this.inventoryService
-      .addProduct(this.productFormGroup.value)
-      .subscribe((res) => {
-        console.log(res);
-      });
+    if (this.isEdit) {
+      this.inventoryService
+        .updateProduct(this.productId, this.productFormGroup.value)
+        .subscribe((res) => {
+          console.log(res);
+          this.getProductData();
+        });
+    } else {
+      this.inventoryService
+        .addProduct(this.productFormGroup.value)
+        .subscribe((res) => {
+          console.log(res);
+        });
+    }
   }
 }

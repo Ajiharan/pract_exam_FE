@@ -14,6 +14,8 @@ export class CustomTableComponent implements OnInit {
   @Output() paginationFunc = new EventEmitter();
   @Output() onNameChangeFunc = new EventEmitter();
   @Output() onEditFormFunc = new EventEmitter();
+  @Output() onDeleteFormFunc = new EventEmitter();
+
   constructor() {}
 
   ngOnInit(): void {}
@@ -33,7 +35,7 @@ export class CustomTableComponent implements OnInit {
     this.onNameChangeFunc.emit(event.target.value);
   }
   public deleteItem(id: string): void {
-    console.log(id);
+    this.onDeleteFormFunc.emit(id);
   }
   public editItem(product: any): void {
     this.onEditFormFunc.emit(product);

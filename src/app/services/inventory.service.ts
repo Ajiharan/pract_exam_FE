@@ -38,4 +38,12 @@ export class InventoryService {
   addProduct(data: any): Observable<any> {
     return this.http.post(`${this.BASE_URL}/product/create`, data);
   }
+
+  updateProduct(id: string, data: any): Observable<any> {
+    return this.http.put(`${this.BASE_URL}/product/update/${id}`, data);
+  }
+
+  deleteProduct(id: string): Observable<any> {
+    return this.http.delete(`${this.BASE_URL}/product/delete/${id}`);
+  }
 }

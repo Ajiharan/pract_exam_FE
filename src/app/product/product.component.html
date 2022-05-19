@@ -110,9 +110,16 @@
       </div>
       <div class="row product-page-container-action-button">
         <input
+          *ngIf="isEdit"
+          type="button"
+          value="Cancel"
+          class="btn btn-danger product-page-container-action-button-cancel"
+          (click)="resetFom()"
+        />
+        <input
           type="submit"
           [value]="isEdit ? 'Update' : 'Add Product'"
-          class="btn btn-success"
+          class="btn btn-primary"
           [disabled]="!productFormGroup.valid"
         />
       </div>
@@ -128,6 +135,7 @@
       (paginationFunc)="paginationFunc($event)"
       (onNameChangeFunc)="onNameChangeFunc($event)"
       (onEditFormFunc)="onEditFormFunc($event)"
+      (onDeleteFormFunc)="onDeleteFormFunc($event)"
     ></app-custom-table>
   </div>
 </div>
